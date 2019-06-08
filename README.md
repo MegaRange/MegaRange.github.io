@@ -1,2 +1,2 @@
 # MegaRange.github.io
-MegaRange.github.io
+https://MegaRange.github.io
