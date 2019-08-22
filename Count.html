@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>计数器页面</title>
+    <!-- <link rel="stylesheet" href="CSS/Count.css"> -->
+    <style type="text/css">
+        body
+        {
+            width: 300px;
+            margin: 0 auto;
+        }
+        #Header a
+        {
+            text-decoration: none;
+        }
+        .CountBox
+        {
+            width: 280px;
+            height: 148px;
+            margin: 20px auto;
+            font-size: 60px;
+        }
+        .CountBox .Captain
+        {
+            height: 25px;
+            padding: 5px 5px 0 5px;
+            font-size: 18px;
+        }
+        .CountBox span
+        {
+            width: 40px;
+            margin-bottom: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            float: left;
+            overflow: hidden;
+            text-align: center;
+        }
+        .CountBox .CBNum
+        {
+            width: 120px;
+        }
+        .CountBox .Btn
+        {
+            height: 40px;
+            width: 40px;
+            float: left;
+            margin: 0 8px;
+        }
+        #Footer
+        {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        <a href="index.html"><h2>← 首页</h2></a>
+    </div>
+    <div id="CountBox1" class="CountBox">
+        <div class="Captain" contenteditable="true">
+            计数器1：点击以修改标题
+        </div>
+        <div>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBCurrent" contenteditable="true">0</span>
+            <span>/</span>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBTarget" contenteditable="true">99</span>
+        </div>
+        <div>   
+            <button class="Btn" onclick="Add1(this)">+</button>
+            <button class="Btn" onclick="Sub1(this)">-</button>
+            <button class="Btn" onclick="LockText(this)">锁</button>
+        </div>
+    </div> 
+    <div id="CountBox2" class="CountBox">
+        <div class="Captain" contenteditable="true">
+            计数器2：点击以修改标题
+        </div>
+        <div>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBCurrent" contenteditable="true">0</span>
+            <span>/</span>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBTarget" contenteditable="true">99</span>
+        </div>
+        <div>   
+            <button class="Btn" onclick="Add1(this)">+</button>
+            <button class="Btn" onclick="Sub1(this)">-</button>
+            <button class="Btn" onclick="LockText(this)">锁</button>
+        </div>
+    </div>
+    <div id="CountBox3" class="CountBox">
+        <div class="Captain" contenteditable="true">
+            计数器3：点击以修改标题
+        </div>
+        <div>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBCurrent" contenteditable="true">0</span>
+            <span>/</span>
+            <span onkeydown="return CheckInput(event)" class="CBNum CBTarget" contenteditable="true">99</span>
+        </div>
+        <div>   
+            <button class="Btn" onclick="Add1(this)">+</button>
+            <button class="Btn" onclick="Sub1(this)">-</button>
+            <button class="Btn" onclick="LockText(this)">锁</button>
+        </div>
+    </div>
+    <div id="Footer">
+        &copy; MegaRange
+    </div>
+
+    <script>
+        function CheckInt(TheString)
+        {
+            // 吐度：这个函数要检测输入进来的字符串，剔除所有非数字字符，然后返回该数字（整数型）
+            //       妈的，动态类型
+            return TheString
+        }
+        function LockText(TheElement)
+        {
+            CBNode = TheElement.parentNode.parentNode.childNodes;
+            Capt = CBNode[1];
+            Unlock = Capt.getAttribute("contenteditable");
+            Curr = CBNode[3].childNodes[1];
+            Targ = CBNode[3].childNodes[5];
+            if (Unlock==="true")
+            {
+                Capt.setAttribute("contenteditable","false");
+                Curr.setAttribute("contenteditable","false");
+                Targ.setAttribute("contenteditable","false");
+            }
+            else
+            {
+                Capt.setAttribute("contenteditable","true");
+                Curr.setAttribute("contenteditable","true");
+                Targ.setAttribute("contenteditable","true");
+            }
+        }
+        function CheckInput(TheEvent)
+        {
+            var keynum;
+            var keychar;
+            var numcheck;
+            if(window.event) // IE
+        	{
+            	keynum = TheEvent.keyCode;
+        	}
+            else if(e.which) // Netscape/Firefox/Opera
+        	{
+               	keynum = TheEvent.which;
+        	}
+            keychar = String.fromCharCode(keynum);
+            numcheck = /\d|%|'|`|{|[a-i]|[p-z]|||\t/;
+            return numcheck.test(keychar);
+        }
+        function Add1(TheElement)
+        {
+            CurrNode = TheElement.parentNode.parentNode.childNodes[3].childNodes[1];
+            var Curr = CurrNode.innerHTML;
+            CurrNode.innerHTML = parseInt(Curr) + 1;
+            // 吐度：把完成后的“数值检测”放进来
+        }
+        function Sub1(TheElement)
+        {
+            CurrNode = TheElement.parentNode.parentNode.childNodes[3].childNodes[1];
+            var Curr = CurrNode.innerHTML;
+            CurrNode.innerHTML = parseInt(Curr) - 1;
+            // 吐度：把完成后的“数值检测”放进来
+        }
+    </script>
+</body>
